@@ -39,10 +39,10 @@ jobs:
       # Build the Docker image
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/${{ OWNER_LC }}/${{ REPOSITORY_LC }}:${{ github.ref_name }} .
+          docker build -t ghcr.io/${OWNER_LC}/${REPOSITORY_LC}:${{ github.ref_name }} .
 
       # Push the Docker image to GitHub Container Registry (only if on release branch)
       - name: Push Docker image
         if: github.ref == 'refs/heads/release'
         run: |
-          docker push ghcr.io/${{ OWNER_LC }}/${{ REPOSITORY_LC }}:${{ github.ref_name }}
+          docker push ghcr.io/${OWNER_LC}/${REPOSITORY_LC}:${{ github.ref_name }}
