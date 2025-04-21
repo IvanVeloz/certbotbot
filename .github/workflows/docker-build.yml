@@ -45,4 +45,4 @@ jobs:
       - name: Push Docker image
         if: github.ref == 'refs/heads/release'
         run: |
-          docker push ghcr.io/${{ github.OWNER_LC }}/${{ REPOSITORY_LC }}:${{ github.ref_name }}
+          docker push ghcr.io/${{ OWNER_LC }}/${{ REPOSITORY_LC }}:${{ github.ref_name }}
