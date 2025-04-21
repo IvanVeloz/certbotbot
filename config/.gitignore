@@ -1,0 +1,8 @@
+# linode.ini configuration file (see certbot plugin documentation)
+linode.ini
+# email.txt, a text file containing the email address to use for the account
+email.txt
+# domains.txt, a text file containing the domains to use for the certificates;
+# one line per certificate. A multi-domain certificate can be achieved by having
+# multiple domains on the same line, separated by commas (no spaces).
+domains.txt

@@ -1,0 +1,9 @@
+services:
+  certbotbot:
+    image: certbotbot
+    container_name: certbotbot
+    volumes:
+      - ./config:/root/.secrets/certbot
+      - certbotcerts:/etc/letsencrypt/live
+      # May be also split into individual volumes for each domain, like
+      # - certexamplecom:/etc/letsencrypt/live/example.com
