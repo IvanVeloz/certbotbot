@@ -10,6 +10,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+  
+      # Set up registry variables
+      - name: set lowercase owner name
+        run: |
+          echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
+        env:
+          OWNER: '${{ github.repository_owner }}'
+      - name: set lowercase repository name
+        run: |
+          echo "REPOSITORY_LC=${REPOSITORY,,}" >>${GITHUB_ENV}
+        env:
+          REPOSITORY: '${{ github.event.repository.name }}'
+
       # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
@@ -26,11 +39,10 @@ jobs:
       # Build the Docker image
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:${{ github.ref_name }} .
+          docker build -t ghcr.io/${{ OWNER_LC }}/${{ REPOSITORY_LC }}:${{ github.ref_name }} .
 
       # Push the Docker image to GitHub Container Registry (only if on release branch)
       - name: Push Docker image
         if: github.ref == 'refs/heads/release'
         run: |
-          docker push ghcr.io/${{ github.repository_owner }}/${{ github.repository }}:${{ github.ref_name }}
-          
+          docker push ghcr.io/${{ github.OWNER_LC }}/${{ REPOSITORY_LC }}:${{ github.ref_name }}
